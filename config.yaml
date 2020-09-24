@@ -1,0 +1,21 @@
+SLACK_TOKEN: 'xoxb-6170265107-1392540237233-ehrR0LaDZNMB250uypQwKpin'
+SCOPES: ['https://www.googleapis.com/auth/spreadsheets.readonly']
+TIMELINE:
+  URL: '1ybCwL_QRqZfElFTCFOEJdVsWK4CXfY4lmGNPMDE5Egs'
+  RANGE: 'Ops Bot Format!A1:B17'
+  SPEC_STORE_DATA: '6 Store!K3:O25'
+  SPEC_STORE_STATUS: '6 Store!R3:S9'
+KLIPFOLIO:
+  URL: '1JsqTbCPNeyp8MaZ3MEvqrAPeOLiRYtNcVO7PcHlnN0g'
+  RANGE: 'Ops Bot Format!A1:B29'
+SLA:
+  URL: '11bqyrsRClJLYBe1qMHpKm3kR4e9PsaptfMO0lJuhYvQ'
+  RANGE: 'Ops Bot Format!A1:B20'
+HELP:
+  MESSAGE: "*How to use*:\n
+            _FORMAT_: command (not case sensitive)\n
+            Available commands:\n
+            + _Metrics_ - Pulls current day by-scan data [Date, Scan, IP %, DD %, IP Succ]\n
+            + _Klipfolio_ - Pulls last 3 days overview data [Date, Core Fleet, Excluded, Target, % MC, % Panos, F&C L/P, GM L/P, % 72 HR]\n
+            + _SLA_ - Pulls last 3 days overview data [Date, Target, 72 HR, 24 HR, % 72 HR, % 24 HR]\n
+            + _6 Store_ - Pulls current day mission data, as well as asset data at time of execution for the 6 high-vis stores [Date, Scan ID, Store, Mission Comp (how many of the 5 data products did it send), Coverage (% of expected aisles scanned)]"
