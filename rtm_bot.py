@@ -32,7 +32,7 @@ async def handle_message(**payload):
       text = YAML_FILE["HELP"].get('MESSAGE', None)
     if request and request != "Help":
       text = f"Hi <@{user}>!\n*{request} Data* :bossanova: \n```{sheet_data}```"
-    
+
     if request:
       try:
         web_client.chat_postMessage(
@@ -47,17 +47,6 @@ async def handle_message(**payload):
 @RTMClient.run_on(event='hello')
 async def handle_hello(**payload):
   print("Hello!")
-
-  #web_client = payload['web_client']
-  #try:
-  #  web_client.chat_postMessage(
-  #    channel=DEFAULT_CHANNEL,
-  #    text=f"Hello! I am now active and ready to take requests!"
-  #  )
-  #except SlackApiError as e:
-  #  assert e.response["ok"] is False
-  #  assert e.response["error"]
-  #  print(f"Got an error: {e.response['error']}")
 
 def parse_message(message, user):
   scopes = YAML_FILE["SCOPES"]
@@ -95,7 +84,7 @@ def parse_message(message, user):
     print(user, 'requested:',message)
     request = "Help"
     response = YAML_FILE["HELP"].get('MESSAGE', None)
-    
+
   else:
     response = ""
     request = ""
@@ -103,7 +92,6 @@ def parse_message(message, user):
   return response, request
 
 def delete_messages():
-  
   return
 
 def scheduled_message():
