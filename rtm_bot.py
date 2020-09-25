@@ -95,8 +95,7 @@ def parse_message(message, user):
   elif message == 'HELP':
     print(user, 'requested:',message)
     request = "Help"
-    response = YAML_FILE["HELP"].get('MESSAGE', None)
-    
+    response = YAML_FILE["HELP"].get('MESSAGE', None) 
   else:
     response = ""
     request = ""
@@ -104,7 +103,6 @@ def parse_message(message, user):
   return response, request
 
 def delete_messages():
-  
   return
 
 def scheduled_message():
@@ -119,11 +117,15 @@ def scheduled_message():
     text=f"*{request} Data* :bossanova: \n```{sheet_data}```"
   )
 
+def testing_job():
+  print("In testing")
+
 def sync_loop():
   schedule.every().hour.at(":00").do(scheduled_message)
+#  schedule.every(3).seconds.do(testing_job)
   while True:
     schedule.run_pending()
-    time.sleep(60)
+    time.sleep(1)
 
 async def main():
   loop = asyncio.get_event_loop()
