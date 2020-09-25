@@ -15,6 +15,7 @@ HELP:
   MESSAGE: "*How to use*:\n
             _FORMAT_: command (not case sensitive)\n
             Available commands:\n
+            + _Help_ - Instructions on how to use/interact with the bot\n
             + _Metrics_ - Pulls current day by-scan data [Date, Scan, IP %, DD %, IP Succ]\n
             + _Klipfolio_ - Pulls last 3 days overview data [Date, Core Fleet, Excluded, Target, % MC, % Panos, F&C L/P, GM L/P, % 72 HR]\n
             + _SLA_ - Pulls last 3 days overview data [Date, Target, 72 HR, 24 HR, % 72 HR, % 24 HR]\n

@@ -49,17 +49,6 @@ async def handle_message(**payload):
 async def handle_hello(**payload):
   print("Hello!")
 
-  #web_client = payload['web_client']
-  #try:
-  #  web_client.chat_postMessage(
-  #    channel=DEFAULT_CHANNEL,
-  #    text=f"Hello! I am now active and ready to take requests!"
-  #  )
-  #except SlackApiError as e:
-  #  assert e.response["ok"] is False
-  #  assert e.response["error"]
-  #  print(f"Got an error: {e.response['error']}")
-
 def parse_message(message, user):
   scopes = YAML_FILE["SCOPES"]
   sheets_api_connection = sheets_api.connect_to_api(scopes)
@@ -102,9 +91,6 @@ def parse_message(message, user):
 
   return response, request
 
-def delete_messages():
-  return
-
 def scheduled_message():
   sheet_data, request = parse_message('METRICS','Bot')
   WEB_CLIENT.chat_postMessage(
@@ -117,12 +103,24 @@ def scheduled_message():
     text=f"*{request} Data* :bossanova: \n```{sheet_data}```"
   )
 
-def testing_job():
-  print("In testing")
-
 def sync_loop():
-  schedule.every().hour.at(":00").do(scheduled_message)
-#  schedule.every(3).seconds.do(testing_job)
+  schedule.every().day.at("2:00").do(scheduled_message)
+  schedule.every().day.at("3:00").do(scheduled_message)
+  schedule.every().day.at("4:00").do(scheduled_message)
+  schedule.every().day.at("5:00").do(scheduled_message)
+  schedule.every().day.at("6:00").do(scheduled_message)
+  schedule.every().day.at("7:00").do(scheduled_message)
+  schedule.every().day.at("8:00").do(scheduled_message)
+  schedule.every().day.at("9:00").do(scheduled_message)
+  schedule.every().day.at("10:00").do(scheduled_message)
+  schedule.every().day.at("11:00").do(scheduled_message)
+  schedule.every().day.at("12:00").do(scheduled_message)
+  schedule.every().day.at("13:00").do(scheduled_message)
+  schedule.every().day.at("14:00").do(scheduled_message)
+  schedule.every().day.at("15:00").do(scheduled_message)
+  schedule.every().day.at("16:00").do(scheduled_message)
+  schedule.every().day.at("17:00").do(scheduled_message)
+  schedule.every().day.at("18:00").do(scheduled_message)
   while True:
     schedule.run_pending()
     time.sleep(1)
