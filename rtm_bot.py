@@ -104,6 +104,8 @@ def scheduled_message():
   )
 
 def sync_loop():
+  schedule.every().day.at("00:00").do(scheduled_message)
+  schedule.every().day.at("01:00").do(scheduled_message)
   schedule.every().day.at("02:00").do(scheduled_message)
   schedule.every().day.at("03:00").do(scheduled_message)
   schedule.every().day.at("04:00").do(scheduled_message)
@@ -119,8 +121,6 @@ def sync_loop():
   schedule.every().day.at("14:00").do(scheduled_message)
   schedule.every().day.at("15:00").do(scheduled_message)
   schedule.every().day.at("16:00").do(scheduled_message)
-  schedule.every().day.at("17:00").do(scheduled_message)
-  schedule.every().day.at("18:00").do(scheduled_message)
   while True:
     schedule.run_pending()
     time.sleep(1)
