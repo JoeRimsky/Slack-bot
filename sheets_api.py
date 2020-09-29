@@ -1,8 +1,6 @@
-import pickle
-import os.path
+import pickle, os.path, yaml
 import pandas as pd
 import numpy as np
-import yaml
 from tabulate import tabulate
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
