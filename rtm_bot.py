@@ -56,13 +56,14 @@ def parse_message(message, user):
   if message in commands:
     subject = message.capitalize()
 
-    spreadsheet_id = YAML_FILE['RESPONSE'][message]['URL']
-    sheet_range = YAML_FILE['RESPONSE'][message]['RANGE']
     if message == 'HELP':
       response = YAML_FILE['RESPONSE'][message]['MESSAGE']
     else:
-      response = sheets_api.get_data(sheets_api_connection, spreadsheet_id, sheet_range)
-
+      spreadsheet_id = YAML_FILE['RESPONSE'][message]['URL']
+      sheet_range = YAML_FILE['RESPONSE'][message]['RANGE']
+      optional_range = YAML_FILE['RESPONSE'][message].get('OPT_RANGE', None)
+      response = sheets_api.get_data(sheets_api_connection, spreadsheet_id, sheet_range,optional_range)
+  
   return response, subject
 
 # Adjust this to loop through the list of channels and desired data sets
