@@ -25,14 +25,29 @@ async def handle_message(**payload):
 
     if subject == "Help":
       text = request
-    if subject and subject != "Help":
-      text = f"Hi <@{user}>!\n*{subject} Data* :bossanova: \n```{request}```"
+    elif subject == "Logs":
+      file_path = request
+      filename = os.path.basename(file_path)
+      filetype = "log"
+    elif subject and subject != "Help":
+      text = f"Hi <@{user}>!\n*{subject}* :bossanova: \n```{request}```"
     
-    if subject:
+    if subject and subject != "Logs":
       try:
         web_client.chat_postMessage(
           channel=channel_id,
           text=text
+        )
+      except SlackApiError as e:
+        assert e.response["ok"] is False
+        assert e.response["error"]
+    elif subject == "Logs":
+      try:
+        web_client.files_upload(
+          channels=channel_id,
+          file=file_path,
+          title=filename,
+          filetype=filetype
         )
       except SlackApiError as e:
         assert e.response["ok"] is False
@@ -42,7 +57,6 @@ async def handle_message(**payload):
 async def handle_hello(**payload):
   return
 
-# Need to test on test bot
 def parse_message(username, message):
   scopes = YAML_FILE["SCOPES"]
   commands = YAML_FILE["AVAILABLE_COMMANDS"]
@@ -55,6 +69,8 @@ def parse_message(username, message):
 
     if message == 'HELP':
       response = YAML_FILE['RESPONSE'][message]['MESSAGE']
+    elif message == 'LOGS':
+      response = YAML_FILE['RESPONSE'][message]['FILE_PATH']
     else:
       spreadsheet_id = YAML_FILE['RESPONSE'][message]['URL']
       sheet_range = YAML_FILE['RESPONSE'][message]['RANGE']

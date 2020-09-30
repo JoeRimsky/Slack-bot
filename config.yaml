@@ -11,6 +11,7 @@ AVAILABLE_COMMANDS:
   - KLIPFOLIO
   - SLA
   - 6 STORE
+  - LOGS
 
 RESPONSE:
   METRICS:
@@ -28,10 +29,13 @@ RESPONSE:
     RANGE: 'Ops Bot Format!A1:B20'
   HELP:
     MESSAGE: "*How to use*:\n
-              _FORMAT_: command (not case sensitive)\n
+              _FORMAT_: `command` (not case sensitive)\n
               Available commands:\n
               + _Help_ - Instructions on how to use/interact with the bot\n
               + _Metrics_ - Pulls current day by-scan data [Date, Scan, IP %, DD %, IP Succ]\n
               + _Klipfolio_ - Pulls last 3 days overview data [Date, Core Fleet, Excluded, Target, % MC, % Panos, F&C L/P, GM L/P, % 72 HR]\n
               + _SLA_ - Pulls last 3 days overview data [Date, Target, 72 HR, 24 HR, % 72 HR, % 24 HR]\n
-              + _6 Store_ - Pulls current day mission data, as well as asset data at time of execution for the 6 high-vis stores [Date, Scan ID, Store, Mission Comp (how many of the 5 data products did it send), Coverage (% of expected aisles scanned)]"
+              + _6 Store_ - Pulls current day mission data, as well as asset data at time of execution for the 6 high-vis stores [Date, Scan ID, Store, Mission Comp (how many of the 5 data products did it send), Coverage (% of expected aisles scanned)]
+              + _Logs_ - Pulls the up-to-date log file consisting of all successful requests w/ associated data"
+  LOGS:
+    FILE_PATH: '/home/jrimsky8854/rtm_bot/logs/data_logs.log'
