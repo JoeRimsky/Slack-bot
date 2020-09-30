@@ -1,10 +1,13 @@
 import pickle, os.path, yaml
 import pandas as pd
 import numpy as np
+import setup_logger
 from tabulate import tabulate
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+
+data_logger = setup_logger.Logger('data_logs','data_logs.log')
 
 def connect_to_api(scopes):
     creds = None
@@ -24,15 +27,16 @@ def connect_to_api(scopes):
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
 
-    service = build('sheets', 'v4', credentials=creds)
+    service = build('sheets', 'v4', credentials=creds,cache_discovery=False)
 
     return service
 
-def get_data(service, spreadsheet_id, sheet_range, optional_range=None):
+def get_data(username, message, service, spreadsheet_id, sheet_range, optional_range=None):
     sheet = service.spreadsheets()
     result = sheet.values().get(spreadsheetId=spreadsheet_id,
                                 range=sheet_range).execute()
     values = result.get('values', [])
+    data_logger.log_data(username, message, values, 'INFO')
     df = pd.DataFrame(values)
 
     master = convert_data(df)

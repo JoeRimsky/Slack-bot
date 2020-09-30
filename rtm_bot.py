@@ -8,8 +8,6 @@ from slack.errors import SlackApiError
 YAML_FILE = yaml.load(open("config.yaml"), Loader=yaml.FullLoader)
 WEB_CLIENT = WebClient(token=YAML_FILE["SLACK_TOKEN"])
 
-logging.basicConfig(filename='debug.log',level=logging.DEBUG)
-
 @RTMClient.run_on(event='message')
 async def handle_message(**payload):
   data = payload['data']
@@ -19,10 +17,11 @@ async def handle_message(**payload):
     message = data.get('text',[]).upper()
     channel_id = data['channel']
     user = data['user']
+    user_info = web_client.users_info(user=user)
+    username = user_info['user']['real_name']
     text = ""
-    now = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
 
-    request, subject = parse_message(message, user)
+    request, subject = parse_message(username, message)
 
     if subject == "Help":
       text = request
@@ -35,18 +34,16 @@ async def handle_message(**payload):
           channel=channel_id,
           text=text
         )
-        logging.info(f"User {user} requested {subject} at {now}")
       except SlackApiError as e:
         assert e.response["ok"] is False
         assert e.response["error"]
-        logging.error(f"Got an error: {e.response['error']}")
 
 @RTMClient.run_on(event='hello')
 async def handle_hello(**payload):
-  logging.info('Connection initiated')
+  return
 
 # Need to test on test bot
-def parse_message(message, user):
+def parse_message(username, message):
   scopes = YAML_FILE["SCOPES"]
   commands = YAML_FILE["AVAILABLE_COMMANDS"]
   sheets_api_connection = sheets_api.connect_to_api(scopes)
@@ -62,14 +59,14 @@ def parse_message(message, user):
       spreadsheet_id = YAML_FILE['RESPONSE'][message]['URL']
       sheet_range = YAML_FILE['RESPONSE'][message]['RANGE']
       optional_range = YAML_FILE['RESPONSE'][message].get('OPT_RANGE', None)
-      response = sheets_api.get_data(sheets_api_connection, spreadsheet_id, sheet_range,optional_range)
+      response = sheets_api.get_data(username,message,sheets_api_connection, spreadsheet_id, sheet_range,optional_range)
   
   return response, subject
 
 # Adjust this to loop through the list of channels and desired data sets
 # Put additional data set level under each channel on yaml file
 def scheduled_message():
-  channels = YAML_FILE["CHANNELS"]
+  #channels = YAML_FILE["CHANNELS"]
 
   sheet_data, request = parse_message('METRICS','Bot')
   WEB_CLIENT.chat_postMessage(

@@ -1,4 +1,4 @@
-SLACK_TOKEN: 'xoxb-6170265107-1392540237233-ehrR0LaDZNMB250uypQwKpin'
+SLACK_TOKEN: 'xoxb-6170265107-1388291640803-wfjCcQZ7TNRcYHt2OSmTgZRJ'
 SCOPES: ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 CHANNELS:
@@ -18,8 +18,8 @@ RESPONSE:
     RANGE: 'Ops Bot Format!A1:B17'
   6 STORE:
     URL: '1ybCwL_QRqZfElFTCFOEJdVsWK4CXfY4lmGNPMDE5Egs'
-    SPEC_STORE_DATA: '6 Store!K3:O25'
-    SPEC_STORE_STATUS: '6 Store!R3:S9'
+    RANGE: '6 Store!K3:O25'
+    OPT_RANGE: '6 Store!R3:S9'
   KLIPFOLIO:
     URL: '1JsqTbCPNeyp8MaZ3MEvqrAPeOLiRYtNcVO7PcHlnN0g'
     RANGE: 'Ops Bot Format!A1:B29'
