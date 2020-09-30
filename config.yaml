@@ -1,4 +1,4 @@
-SLACK_TOKEN: 'xoxb-6170265107-1388291640803-wfjCcQZ7TNRcYHt2OSmTgZRJ'
+SLACK_TOKEN: 'xoxb-6170265107-1392540237233-ehrR0LaDZNMB250uypQwKpin'
 SCOPES: ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 CHANNELS:
