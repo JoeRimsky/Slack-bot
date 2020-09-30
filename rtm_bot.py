@@ -17,7 +17,7 @@ async def handle_message(**payload):
     message = data.get('text',[]).upper()
     channel_id = data['channel']
     user = data['user']
-    user_info = web_client.users_info(user=user)
+    user_info = WEB_CLIENT.users_info(user=user)
     username = user_info['user']['real_name']
     text = ""
 
@@ -106,7 +106,7 @@ async def main():
   rtm_client = RTMClient(token=YAML_FILE["SLACK_TOKEN"], run_async=True, loop=loop)
   executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
   await asyncio.gather(
-    loop.run_in_executor(executor, sync_loop),
+    #loop.run_in_executor(executor, sync_loop),
     rtm_client.start()
   )
 
