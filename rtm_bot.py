@@ -21,7 +21,7 @@ async def handle_message(**payload):
     username = user_info['user']['real_name']
     text = ""
 
-    request, subject = parse_message(username, message)
+    request, subject = parse_message(username=username, message=message)
 
     if subject == "Help":
       text = request
@@ -46,7 +46,7 @@ async def handle_hello(**payload):
 def parse_message(username, message):
   scopes = YAML_FILE["SCOPES"]
   commands = YAML_FILE["AVAILABLE_COMMANDS"]
-  sheets_api_connection = sheets_api.connect_to_api(scopes)
+  sheets_api_connection = sheets_api.connect_to_api(scopes=scopes)
   subject = ""
   response = ""
 
@@ -59,7 +59,7 @@ def parse_message(username, message):
       spreadsheet_id = YAML_FILE['RESPONSE'][message]['URL']
       sheet_range = YAML_FILE['RESPONSE'][message]['RANGE']
       optional_range = YAML_FILE['RESPONSE'][message].get('OPT_RANGE', None)
-      response = sheets_api.get_data(username,message,sheets_api_connection, spreadsheet_id, sheet_range,optional_range)
+      response = sheets_api.get_data(username=username,message=message,service=sheets_api_connection,spreadsheet_id=spreadsheet_id,sheet_range=sheet_range,optional_range=optional_range)
   
   return response, subject
 
@@ -68,7 +68,7 @@ def parse_message(username, message):
 def scheduled_message():
   #channels = YAML_FILE["CHANNELS"]
 
-  sheet_data, request = parse_message('METRICS','Bot')
+  sheet_data, request = parse_message(message='METRICS',username='Bot')
   WEB_CLIENT.chat_postMessage(
     channel=YAML_FILE["CHANNELS"].get('DEFAULT', None),
     text=f"*{request} Data* :bossanova: \n```{sheet_data}```"
