@@ -7,7 +7,7 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-data_logger = setup_logger.Logger('data_logs','data_logs.log')
+data_logger = setup_logger.Logger(log='data_logs',file_name='/home/jrimsky8854/rtm_bot/logs/data_logs.log')
 
 def connect_to_api(scopes):
     creds = None
