@@ -87,12 +87,12 @@ def scheduled_message():
   sheet_data, request = parse_message(message='METRICS',username='Bot')
   WEB_CLIENT.chat_postMessage(
     channel=YAML_FILE["CHANNELS"].get('DEFAULT', None),
-    text=f"*{request} Data* :bossanova: \n```{sheet_data}```"
+    text=f"*{request}* :bossanova: \n```{sheet_data}```"
   )
   sheet_data, request = parse_message(message='6 STORE',username='Bot')
   WEB_CLIENT.chat_postMessage(
     channel=YAML_FILE["CHANNELS"].get('HIVIZ', None),
-    text=f"*{request} Data* :bossanova: \n```{sheet_data}```"
+    text=f"*{request}* :bossanova: \n```{sheet_data}```"
   )
 
 def sync_loop():
