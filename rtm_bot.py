@@ -29,6 +29,9 @@ async def handle_message(**payload):
       file_path = request
       filename = os.path.basename(file_path)
       filetype = "log"
+    elif subject == "Goodbye":
+      text = request
+      channel_id = YAML_FILE["CHANNELS"].get('DEFAULT', None)
     elif subject and subject != "Help":
       text = f"Hi <@{user}>!\n*{subject}* :bossanova: \n```{request}```"
     
@@ -63,6 +66,10 @@ def parse_message(username, message):
   sheets_api_connection = sheets_api.connect_to_api(scopes=scopes)
   subject = ""
   response = ""
+
+  if message == 'GOODBYE':
+    subject = message.capitalize()
+    response = '_The 6PM update will be my last alert. Thank you everyone for utilizing my services._'
 
   if message in commands:
     subject = message.capitalize()
