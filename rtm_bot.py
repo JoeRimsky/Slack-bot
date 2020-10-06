@@ -29,9 +29,6 @@ async def handle_message(**payload):
       file_path = request
       filename = os.path.basename(file_path)
       filetype = "log"
-    elif subject == "Goodbye":
-      text = request
-      channel_id = YAML_FILE["CHANNELS"].get('DEFAULT', None)
     elif subject and subject != "Help":
       text = f"Hi <@{user}>!\n*{subject}* :bossanova: \n```{request}```"
     
@@ -60,16 +57,22 @@ async def handle_message(**payload):
 async def handle_hello(**payload):
   return
 
+def say_goodbye():
+  WEB_CLIENT.chat_postMessage(
+    channel=YAML_FILE["CHANNELS"].get('DEFAULT', None),
+    text="_The 6PM update will be my last communication. Thank you all for utilizing my services._"
+  )
+  WEB_CLIENT.chat_postMessage(
+    channel=YAML_FILE["CHANNELS"].get('HIVIZ', None),
+    text="_The 6PM update will be my last communication. Thank you all for utilizing my services._"
+  )
+
 def parse_message(username, message):
   scopes = YAML_FILE["SCOPES"]
   commands = YAML_FILE["AVAILABLE_COMMANDS"]
   sheets_api_connection = sheets_api.connect_to_api(scopes=scopes)
   subject = ""
   response = ""
-
-  if message == 'GOODBYE':
-    subject = message.capitalize()
-    response = '_The 6PM update will be my last alert. Thank you everyone for utilizing my services._'
 
   if message in commands:
     subject = message.capitalize()
@@ -118,6 +121,7 @@ def sync_loop():
   schedule.every().day.at("14:00").do(scheduled_message)
   schedule.every().day.at("15:00").do(scheduled_message)
   schedule.every().day.at("16:00").do(scheduled_message)
+  schedule.every().day.at("16:00").do(say_goodbye)
   schedule.every().day.at("17:00").do(scheduled_message)
   schedule.every().day.at("18:00").do(scheduled_message)
   while True:
