@@ -1,4 +1,4 @@
-SLACK_TOKEN: 'xoxb-6170265107-1392540237233-ehrR0LaDZNMB250uypQwKpin'
+SLACK_TOKEN: 'HIDDEN'
 SCOPES: ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 CHANNELS:
@@ -15,17 +15,17 @@ AVAILABLE_COMMANDS:
 
 RESPONSE:
   METRICS:
-    URL: '1ybCwL_QRqZfElFTCFOEJdVsWK4CXfY4lmGNPMDE5Egs'
+    URL: 'HIDDEN'
     RANGE: 'Ops Bot Format!A1:B17'
   6 STORE:
-    URL: '1ybCwL_QRqZfElFTCFOEJdVsWK4CXfY4lmGNPMDE5Egs'
+    URL: 'HIDDEN'
     RANGE: '6 Store!K3:O25'
     OPT_RANGE: '6 Store!R3:S9'
   KLIPFOLIO:
-    URL: '1JsqTbCPNeyp8MaZ3MEvqrAPeOLiRYtNcVO7PcHlnN0g'
+    URL: 'HIDDEN'
     RANGE: 'Ops Bot Format!A1:B29'
   SLA:
-    URL: '11bqyrsRClJLYBe1qMHpKm3kR4e9PsaptfMO0lJuhYvQ'
+    URL: 'HIDDEN'
     RANGE: 'Ops Bot Format!A1:B20'
   HELP:
     MESSAGE: "*How to use*:\n
