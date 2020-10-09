@@ -1,5 +1,4 @@
 *AUTHOR*: Joseph Rimsky  
-*COMPANY*: Bossa Nova Robotics
 
 # Purpose
 The purpose of this Slack bot is to speed up daily observations by bringing multiple datasets to one source.
