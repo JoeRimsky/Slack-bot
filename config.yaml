@@ -16,17 +16,17 @@ AVAILABLE_COMMANDS:
 RESPONSE:
   METRICS:
     URL: 'HIDDEN'
-    RANGE: 'Ops Bot Format!A1:B17'
+    RANGE: 'HIDDEN'
   6 STORE:
     URL: 'HIDDEN'
-    RANGE: '6 Store!K3:O25'
-    OPT_RANGE: '6 Store!R3:S9'
+    RANGE: 'HIDDEN'
+    OPT_RANGE: 'HIDDEN'
   KLIPFOLIO:
     URL: 'HIDDEN'
-    RANGE: 'Ops Bot Format!A1:B29'
+    RANGE: 'HIDDEN'
   SLA:
     URL: 'HIDDEN'
-    RANGE: 'Ops Bot Format!A1:B20'
+    RANGE: 'HIDDEN'
   HELP:
     MESSAGE: "*How to use*:\n
               _FORMAT_: `command` (not case sensitive)\n
