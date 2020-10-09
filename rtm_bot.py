@@ -99,7 +99,7 @@ def scheduled_message():
     channel=YAML_FILE["CHANNELS"].get('DEFAULT', None),
     text=f"*{request}* \n```{sheet_data}```"
   )
-  sheet_data, request = parse_message(message='6 STORE',username='Bot')
+  sheet_data, request = parse_message(message='HIDDEN',username='Bot')
   WEB_CLIENT.chat_postMessage(
     channel=YAML_FILE["CHANNELS"].get('HIVIZ', None),
     text=f"*{request}* \n```{sheet_data}```"
