@@ -33,7 +33,7 @@ RESPONSE:
                   + _6 Store_ - Pulls current day mission data, as well as asset data at time of execution for the 6 high-vis stores [Date, Scan ID, Store, Mission Comp (how many of the 5 data products did it send), Coverage (% of expected aisles scanned)]\n
                   + _Logs_ - Pulls the up-to-date log file consisting of all successful requests w/ associated data"
     LOGS:
-        FILE_PATH: '/home/jrimsky8854/rtm_bot/logs/data_logs.log'
+        FILE_PATH: 'INPUT DESIRED PATH'
 
 SCHEDULED_MESSAGES:
     HOURLY_OPS_METRICS:

@@ -6,8 +6,8 @@ from slack import WebClient
 from slack.errors import SlackApiError
 
 SLACK_TOKEN = os.environ['SLACK_TOKEN']
-
 YAML_FILE = yaml.load(open("config.yaml"), Loader=yaml.FullLoader)
+# Created for scheduled messages
 WEB_CLIENT = WebClient(token=SLACK_TOKEN)
 
 @RTMClient.run_on(event='message')
@@ -25,7 +25,8 @@ async def handle_message(**payload):
         valid_command = verify_command(message)
 
     if valid_command:
-        request, subject = process_command(username=username, command=message)
+        subject = command.capitalize()
+        request = get_request(username=username, command=message)
 
         if subject == "Help":
             text = request
@@ -57,25 +58,17 @@ async def handle_message(**payload):
                 assert e.response["ok"] is False
                 assert e.response["error"]
 
-# Listens for the initial webhook connection
-# @RTMClient.run_on(event='hello')
-# async def handle_hello(**payload):
-#   return
-
 # Verify passed message is a valid command for processing
 def verify_command(message):
+    commands = YAML_FILE["AVAILABLE_COMMANDS"]
     return message in commands
 
 # Evaluate passed command to gather desired data
-def process_command(username='Bot', command):
-    scopes = YAML_FILE["SCOPES"]
-    commands = YAML_FILE["AVAILABLE_COMMANDS"]
-    sheets_api_connection = sheets_api.connect_to_api(scopes=scopes)
-    subject = ""
+def get_request(username, command):
     response = ""
-
-    subject = command.capitalize()
-
+    scopes = YAML_FILE["SCOPES"]
+    sheets_api_connection = sheets_api.connect_to_api(scopes=scopes)
+    
     if command == 'HELP':
         response = YAML_FILE['RESPONSE'][command]['MESSAGE']
     elif command == 'LOGS':
@@ -86,7 +79,7 @@ def process_command(username='Bot', command):
         optional_range = YAML_FILE['RESPONSE'][command].get('OPT_RANGE', None)
         response = sheets_api.get_data(username=username,message=command,service=sheets_api_connection,spreadsheet_id=spreadsheet_id,sheet_range=sheet_range,optional_range=optional_range)
   
-    return response, subject
+    return response
 
 # Step through SCHEDULED_MESSAGES in config.yaml to gather channels and commands to be sent every hour
 def scheduled_message():
@@ -95,11 +88,12 @@ def scheduled_message():
         channel = scheduled_messages[scheduled]["CHANNEL"]
         command = scheduled_messages[scheduled]["COMMAND"]
 
-        sheet_data, request = process_command(command=command)
+        subject = command.capitalize()
+        request = get_request(username='Bot',command=command)
 
         WEB_CLIENT.chat_postMessage(
             channel=channel,
-            text=f"*{request}* :bossanova: \n```{sheet_data}```"
+            text=f"*{subject}* :bossanova: \n```{request}```"
         )
 
 # Create an hourly schedule between 2:00 and 18:00 machine time
