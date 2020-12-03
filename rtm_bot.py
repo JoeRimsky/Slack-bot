@@ -10,6 +10,7 @@ YAML_FILE = yaml.load(open("config.yaml"), Loader=yaml.FullLoader)
 # Created for scheduled messages
 WEB_CLIENT = WebClient(token=SLACK_TOKEN)
 
+# Listens for any message in a direct message to the bot or in a channel containing the bot
 @RTMClient.run_on(event='message')
 async def handle_message(**payload):
     data = payload['data']

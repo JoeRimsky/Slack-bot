@@ -1,6 +1,7 @@
-*AUTHOR*: Joseph Rimsky  
+# Author
+Joseph Rimsky
 
-# Purpose
+## Purpose
 The purpose of this Slack bot is to speed up daily observations by bringing multiple datasets to one source.
 
 ##  How?
